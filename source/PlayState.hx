@@ -39,7 +39,7 @@ class PlayState extends FlxState
 		player.drag.x = 800;
 		player.maxVelocity.set(200, 400);
 		player.scale.set(0.5,0.5);
-		FlxG.camera.follow(player, FlxCameraFollowStyle.LOCKON);
+		FlxG.camera.follow(player);
 		player.updateHitbox();
 		
 		// Add sprites
