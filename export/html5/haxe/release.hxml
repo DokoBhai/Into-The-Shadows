@@ -1,12 +1,11 @@
 -main ApplicationMain 
--cp C:/Users/dokob/Documents/FNF-PsychEngine-main (1)/FNF-PsychEngine-main (1)/FNF-PsychEngine-main/.haxelib/flixel/6,1,0
--D flixel=6.1.0
+-cp C:/Users/dokob/LearnPj/Into-The-Shadows/.haxelib/flixel/5,6,1
+-D flixel=5.6.1
 --macro openfl.utils._internal.ExtraParamsMacro.include()
--cp C:/Users/dokob/Documents/FNF-PsychEngine-main (1)/FNF-PsychEngine-main (1)/FNF-PsychEngine-main/.haxelib/openfl/9,3,3/src
+-cp C:/Users/dokob/LearnPj/Into-The-Shadows/.haxelib/openfl/9,3,3/src
 -D openfl=9.3.3
---macro lime._internal.macros.DefineMacro.run()
--cp C:/Users/dokob/Documents/FNF-PsychEngine-main (1)/FNF-PsychEngine-main (1)/FNF-PsychEngine-main/.haxelib/lime/8,1,2/src
 -D lime=8.1.2
+-cp C:\Users\dokob\LearnPj\Into-The-Shadows\.haxelib\lime\8,1,2/src
 -cp source
 -D tools=8.1.2
 -D lime-canvas
@@ -25,6 +24,8 @@
 -D web
 --remap flash:openfl
 --macro flixel.system.macros.FlxDefines.run()
--js export/html5/bin/DokoGG[.js
+--connect
+6000
+-js export/html5/bin/Into-The-Shadows.js
 -cp export/html5/haxe
 -D html5

@@ -11,7 +11,6 @@ import flixel.util.FlxColor;
 import openfl.text.TextFieldAutoSize;
 
 
-
 class PlayState extends FlxState
 {
 	var player:FlxSprite;
@@ -19,6 +18,8 @@ class PlayState extends FlxState
 	override public function create()
 	{
 		super.create();
+
+		FlxG.debugger.drawDebug = true;
 
 		bg = new FlxSprite();
 		bg.makeGraphic(FlxG.width, 150, FlxColor.GRAY, true);
@@ -33,6 +34,7 @@ class PlayState extends FlxState
 		player.acceleration.y = 400;
 		player.drag.x = 800;
 		player.maxVelocity.set(200, 400);
+		FlxG.camera.follow(player);
 		
 		add(bg);
 		add(player);
@@ -47,25 +49,12 @@ class PlayState extends FlxState
 			player.velocity.y = -200;
 		}
 
-		if(FlxG.keys.pressed.D)
-		{
-			player.x += 10;
-		}
-
-		
-		if(FlxG.keys.pressed.A)
-		{
-			player.x -= 10;
-		}
-
-		if(FlxG.mouse.overlaps(player))
-		{
-			if (FlxG.mouse.pressed)
-			{
-				player.x = FlxG.mouse.x - player.width /2;
-				player.y = FlxG.mouse.y - player.height /2;
-			}
-		}
+		if (FlxG.keys.pressed.A)
+			player.velocity.x = -200;
+		else if (FlxG.keys.pressed.D)
+			player.velocity.x = 200;
+		else
+			player.velocity.x = 0;
 	
 		FlxG.collide(player, bg);
 	
