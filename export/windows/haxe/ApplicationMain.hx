@@ -16,11 +16,11 @@ class ApplicationMain
 	#if !macro
 	public static function main()
 	{
-		lime.system.System.__registerEntryPoint("DokoGG[", create);
+		lime.system.System.__registerEntryPoint("Into-The-Shadows", create);
 
 		#if (js && html5)
 		#if (munit || utest)
-		lime.system.System.embed("DokoGG[", null, 640, 480);
+		lime.system.System.embed("Into-The-Shadows", null, 640, 480);
 		#end
 		#else
 		create(null);
@@ -35,10 +35,10 @@ class ApplicationMain
 		ManifestResources.init(config);
 		#end
 
-		app.meta["build"] = "63";
+		app.meta["build"] = "2";
 		app.meta["company"] = "HaxeFlixel";
-		app.meta["file"] = "DokoGG[";
-		app.meta["name"] = "FirstPj";
+		app.meta["file"] = "Into-The-Shadows";
+		app.meta["name"] = "Into The Shadows";
 		app.meta["packageName"] = "com.example.myapp";
 		app.meta["version"] = "0.0.1";
 
@@ -60,7 +60,7 @@ class ApplicationMain
 			minimized: false,
 			parameters: {},
 			resizable: true,
-			title: "FirstPj",
+			title: "Into The Shadows",
 			width: 640,
 			x: null,
 			y: null,
@@ -102,7 +102,7 @@ class ApplicationMain
 		app.createWindow(attributes);
 		
 		#elseif air
-		app.window.title = "FirstPj";
+		app.window.title = "Into The Shadows";
 		#else
 		app.window.context.attributes.background = 0;
 		app.window.frameRate = 60;
