@@ -28,8 +28,6 @@
 -D desktop
 --remap flash:openfl
 --macro flixel.system.macros.FlxDefines.run()
---connect
-6000
 -cp export/windows/haxe
 -cpp export/windows/obj
 --macro keep("Main")
