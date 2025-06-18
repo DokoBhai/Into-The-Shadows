@@ -6,6 +6,10 @@
 -D openfl=9.3.3
 -D lime=8.1.2
 -cp C:\Users\dokob\LearnPj\Into-The-Shadows\.haxelib\lime\8,1,2/src
+-cp C:/Users/dokob/LearnPj/Into-The-Shadows/.haxelib/hxdiscord_rpc/1,3,0
+-D hxdiscord_rpc=1.3.0
+-cp C:/Users/dokob/LearnPj/Into-The-Shadows/.haxelib/hxcpp/4,3,2
+-D hxcpp=4.3.2
 -cp source
 -D tools=8.1.2
 -D lime-canvas
@@ -24,8 +28,6 @@
 -D web
 --remap flash:openfl
 --macro flixel.system.macros.FlxDefines.run()
---connect
-6000
 -js export/html5/bin/Into-The-Shadows.js
 -cp export/html5/haxe
 -D html5
