@@ -1,0 +1,35 @@
+-main ApplicationMain 
+-cp C:/Users/dokob/Documents/FNF-PsychEngine-main (1)/FNF-PsychEngine-main (1)/FNF-PsychEngine-main/.haxelib/flixel/6,1,0
+-D flixel=6.1.0
+--macro openfl.utils._internal.ExtraParamsMacro.include()
+-cp C:/Users/dokob/Documents/FNF-PsychEngine-main (1)/FNF-PsychEngine-main (1)/FNF-PsychEngine-main/.haxelib/openfl/9,3,3/src
+-D openfl=9.3.3
+--macro lime._internal.macros.DefineMacro.run()
+-cp C:/Users/dokob/Documents/FNF-PsychEngine-main (1)/FNF-PsychEngine-main (1)/FNF-PsychEngine-main/.haxelib/lime/8,1,2/src
+-D lime=8.1.2
+-cp source
+-D lime-openal
+-D message.reporting=pretty
+-D native
+-D lime-curl
+-D openfl-native
+-D FLX_NO_HEALTH
+-D lime-harfbuzz
+-D tools=8.1.2
+-D lime-cairo
+-D FLX_NO_DEBUG
+-D lime-opengl
+-D no-compilation
+-D NAPE_RELEASE_BUILD
+-D FLX_NO_TOUCH
+-D lime-native
+-D lime-vorbis
+-D lime-cffi
+-D windows
+-D desktop
+--remap flash:openfl
+--macro flixel.system.macros.FlxDefines.run()
+-cp export/windows/haxe
+-cpp export/windows/obj
+--macro keep("Main")
+-D final
