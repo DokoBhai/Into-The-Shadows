@@ -20,12 +20,14 @@ class Menu extends FlxState{
 	override public function create()
 	{
 		super.create();
+		// Play button
 		Playb = new FlxText(100, 100, 600, "Play");
 		Playb.setFormat("Play", 50, FlxColor.WHITE, FlxTextAlign.CENTER);
 		Playb.font = "assets/fonts/def.ttf";
 		Playb.screenCenter(X);
 		add(Playb);
 
+		// Oop bootonnnn lol
 		optionb = new FlxText(100, 100, 600, "Options");
 		optionb.setFormat("Options", 50, FlxColor.WHITE, FlxTextAlign.CENTER);
 		optionb.font = "assets/fonts/def.ttf";
@@ -33,6 +35,7 @@ class Menu extends FlxState{
 		optionb.y += 100;
 		add(optionb);
 
+		// Not available button
 		no = new FlxText(100, 100, 600, "Options");
 		no.setFormat("THIS IS NOT AVAILABLE YET", FlxG.width, FlxColor.RED, FlxTextAlign.CENTER);
 		no.screenCenter(X);

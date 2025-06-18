@@ -6,6 +6,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.graphics.FlxGraphic;
+import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -19,27 +20,29 @@ class PlayState extends FlxState
 	{
 		super.create();
 
-		DiscordClient.changePresence("Jumping around", "In PlayState", "icon");
+		DiscordClient.changePresence("Let bro cook", "Playing Platforms", "icon");
 
-
-		FlxG.debugger.drawDebug = true;
-
+		// Make the ground
 		bg = new FlxSprite();
 		bg.makeGraphic(FlxG.width, 150, FlxColor.GRAY, true);
 		bg.updateHitbox();
 		bg.immovable = true;
 		bg.y = FlxG.height - bg.height;
 
-
+		// Make the player
 		player = new FlxSprite();
-		player.loadGraphic(AssetPaths.sprite__png);
+		player.frames = FlxAtlasFrames.fromSparrow(AssetPaths.mainChar__png, AssetPaths.mainChar__xml);
+		player.animation.addByPrefix("idle", "idle", 24, true);
 		player.screenCenter();
+		player.animation.play("idle");
 		player.acceleration.y = 400;
 		player.drag.x = 800;
 		player.maxVelocity.set(200, 400);
-		FlxG.camera.follow(player);
+		player.scale.set(0.5,0.5);
+		FlxG.camera.follow(player, FlxCameraFollowStyle.LOCKON);
 		player.updateHitbox();
 		
+		// Add sprites
 		add(bg);
 		add(player);
 	}
@@ -64,7 +67,5 @@ class PlayState extends FlxState
 	
 		FlxG.collide(player, bg);
 	
-	}
-
-	
+	}	
 }
