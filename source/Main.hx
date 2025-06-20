@@ -8,6 +8,10 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-		addChild(new FlxGame(0, 0, DiscordClient));
+		#if discordSupported
+		addChild(new FlxGame(320, 240, DiscordClient));
+		#end
+
+		addChild(new FlxGame(320, 240, Menu));
 	}
 }

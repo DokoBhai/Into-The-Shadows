@@ -1,3 +1,4 @@
+#if discordSupported
 import cpp.RawPointer;
 import flixel.FlxG;
 import flixel.FlxState;
@@ -67,3 +68,4 @@ class DiscordClient extends FlxState
         Discord.UpdatePresence(RawPointer.addressOf(presence));
     }
 }
+#end

@@ -10,5 +10,7 @@
 			"source.sortImports": "explicit"
 		}
 	},
-	"haxe.enableExtendedIndentation": true
+	"haxe.enableExtendedIndentation": true,
+	"haxe.executable": "C:/HaxeToolkit/haxe/haxe.exe"
+
 }
