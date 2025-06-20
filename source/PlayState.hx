@@ -57,13 +57,8 @@ class PlayState extends FlxState
 		player.drag.x = 800;
 		player.maxVelocity.set(200, 400);
 		player.scale.set(0.5,0.5);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+		
 		FlxG.camera.follow(player);
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 		player.updateHitbox();
 		map.loadEntities(placeEntities, "entities");
 
