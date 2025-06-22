@@ -5,7 +5,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import helpers.TransitionManager;
+import helpers.CurtainOpenSubState;
 
 
 class OptionState extends FlxState{
@@ -23,7 +23,8 @@ class OptionState extends FlxState{
         notava.screenCenter();
         add(notava);
 
-        TransitionManager.openCurtainsIfNeeded();
+        openSubState(new CurtainOpenSubState(0.5));
+
     }
 
     override public function update(elapsed:Float)
@@ -31,7 +32,7 @@ class OptionState extends FlxState{
 		super.update(elapsed);
 
         if (FlxG.keys.justPressed.ESCAPE){
-            TransitionManager.switchState(new Menu());
+            FlxG.switchState(new Menu());
         }
     }
 }

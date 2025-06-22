@@ -15,7 +15,7 @@ import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
-import helpers.TransitionManager;
+import helpers.CurtainOpenSubState;
 import openfl.text.TextFieldAutoSize;
 import substates.CurtainOpenTransition;
 
@@ -31,7 +31,6 @@ class PlayState extends FlxState
 	override public function create()
 	{
 		super.create();
-
 		//map stuff
 		map = new FlxOgmo3Loader(AssetPaths.into__ogmo, AssetPaths.room_001__json);
 		walls = map.loadTilemap(AssetPaths.tiles__png, "walls");
@@ -74,7 +73,7 @@ class PlayState extends FlxState
 		//add(bg)
 		add(player);
 
-		TransitionManager.openCurtainsIfNeeded();
+		openSubState(new CurtainOpenSubState(0.5));
 	}
 
 	function placeEntities(entity:EntityData)
@@ -106,7 +105,7 @@ class PlayState extends FlxState
 			player.velocity.x = 0;
 
 		if (FlxG.keys.justPressed.ESCAPE){
-            TransitionManager.switchState(new Menu());
+            FlxG.switchState(new Menu());
         }
 	
 		FlxG.collide(player, walls);
