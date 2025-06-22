@@ -1,3 +1,4 @@
+import TransitionState;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -7,6 +8,7 @@ import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import helpers.TransitionManager;
 import openfl.text.TextFieldAutoSize;
 
 class Menu extends FlxState{
@@ -45,6 +47,8 @@ class Menu extends FlxState{
 		optionb.y += 100;
 		add(optionb);
 
+
+		TransitionManager.openCurtainsIfNeeded();
 	}
 
 	override public function update(elapsed:Float)
@@ -82,7 +86,7 @@ class Menu extends FlxState{
             type: FlxTweenType.PINGPONG
 			});
 
-			FlxG.switchState(() -> new PlayState()); 
+			TransitionManager.switchState(new PlayState());
 
 			
 		}
@@ -103,7 +107,7 @@ class Menu extends FlxState{
 
 			
 		});
-			FlxG.switchState(() -> new OptionState());
+			TransitionManager.switchState(new OptionState());
 		}
 	}
 

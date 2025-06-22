@@ -1,6 +1,7 @@
 package;
 
 import DiscordClient;
+import TransitionState;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -14,7 +15,10 @@ import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
+import helpers.TransitionManager;
 import openfl.text.TextFieldAutoSize;
+import substates.CurtainOpenTransition;
+
 
 
 class PlayState extends FlxState
@@ -69,6 +73,8 @@ class PlayState extends FlxState
 		// Add sprites
 		//add(bg)
 		add(player);
+
+		TransitionManager.openCurtainsIfNeeded();
 	}
 
 	function placeEntities(entity:EntityData)
@@ -100,7 +106,7 @@ class PlayState extends FlxState
 			player.velocity.x = 0;
 
 		if (FlxG.keys.justPressed.ESCAPE){
-            FlxG.switchState(() -> new Menu());
+            TransitionManager.switchState(new Menu());
         }
 	
 		FlxG.collide(player, walls);

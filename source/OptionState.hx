@@ -1,13 +1,11 @@
+import TransitionState;
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.graphics.FlxGraphic;
-import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import openfl.text.TextFieldAutoSize;
+import helpers.TransitionManager;
 
 
 class OptionState extends FlxState{
@@ -24,6 +22,8 @@ class OptionState extends FlxState{
         notava.font = "assets/fonts/def.ttf";
         notava.screenCenter();
         add(notava);
+
+        TransitionManager.openCurtainsIfNeeded();
     }
 
     override public function update(elapsed:Float)
@@ -31,7 +31,7 @@ class OptionState extends FlxState{
 		super.update(elapsed);
 
         if (FlxG.keys.justPressed.ESCAPE){
-            FlxG.switchState(() -> new Menu());
+            TransitionManager.switchState(new Menu());
         }
     }
 }
