@@ -17,7 +17,6 @@ import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
 import helpers.CurtainOpenSubState;
 import openfl.text.TextFieldAutoSize;
-import substates.CurtainOpenTransition;
 
 
 

@@ -1,3 +1,4 @@
+import DiscordClient;
 import TransitionState;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -23,6 +24,10 @@ class Menu extends FlxState{
 	override public function create()
 	{
 		super.create();
+
+		#if discordSupported
+		DiscordClient.changePresence("Let bro cook", "In The Menu's", "icon");
+		#end
 
 		bg = new FlxSprite(0, 0);
 		bg.loadGraphic("assets/images/bg.png");
