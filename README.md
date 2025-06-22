@@ -7,7 +7,6 @@ A stylish HaxeFlixel game featuring Discord Rich Presence and smooth curtain-sty
 - 🎮 Built with [HaxeFlixel](https://haxeflixel.com/)
 - 🧠 Discord Rich Presence integration
 - 🎬 Curtain-style state transitions
-- 🎵 Audio-driven gameplay (OGG support)
 - 🧪 Modular and customizable game states
 
 ## 🛠 Requirements
