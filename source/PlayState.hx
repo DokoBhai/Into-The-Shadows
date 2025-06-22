@@ -40,6 +40,7 @@ class PlayState extends FlxState
 		#if discordSupported
 		DiscordClient.changePresence("Let bro cook", "Playing Platforms", "icon");
 		#end
+
 		// Make the ground
 		bg = new FlxSprite();
 		bg.makeGraphic(FlxG.width, 150, FlxColor.GRAY, true);
@@ -56,6 +57,7 @@ class PlayState extends FlxState
 		player.acceleration.y = 400;
 		player.drag.x = 800;
 		player.maxVelocity.set(200, 400);
+		player.setSize(0, 0);
 		player.scale.set(0.5,0.5);
 		
 		FlxG.camera.follow(player);
@@ -89,13 +91,17 @@ class PlayState extends FlxState
 		}
 
 		if (FlxG.keys.pressed.A)
-			player.velocity.x = -200;
+			{player.velocity.x = -200;
+			player.flipX = true;}
 		else if (FlxG.keys.pressed.D)
-			player.velocity.x = 200;
+			{player.velocity.x = 200;
+			player.flipX = false;}
 		else
 			player.velocity.x = 0;
 
-		 // Wrap background position to create endless effect horizontally
+		if (FlxG.keys.justPressed.ESCAPE){
+            FlxG.switchState(() -> new Menu());
+        }
 	
 		FlxG.collide(player, walls);
 	

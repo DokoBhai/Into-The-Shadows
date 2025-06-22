@@ -16,10 +16,20 @@ class Menu extends FlxState{
 	var optionb:FlxText;
 	var no:FlxText;
 	var sel:Float = 1;
+	var bg:FlxSprite;
 
 	override public function create()
 	{
 		super.create();
+
+		bg = new FlxSprite(0, 0);
+		bg.loadGraphic("assets/images/bg.png");
+		bg.setGraphicSize(FlxG.width, FlxG.height);
+		bg.screenCenter();
+		bg.scrollFactor.set(0, 0);
+		add(bg);
+
+
 		// Play button
 		Playb = new FlxText(100, 100, 600, "Play");
 		Playb.setFormat("Play", 50, FlxColor.WHITE, FlxTextAlign.CENTER);
@@ -35,12 +45,6 @@ class Menu extends FlxState{
 		optionb.y += 100;
 		add(optionb);
 
-		// Not available button
-		no = new FlxText(100, 100, 600, "Options");
-		no.setFormat("THIS IS NOT AVAILABLE YET", FlxG.width, FlxColor.RED, FlxTextAlign.CENTER);
-		no.screenCenter(X);
-		no.visible = false;
-		add(no);
 	}
 
 	override public function update(elapsed:Float)
@@ -78,7 +82,8 @@ class Menu extends FlxState{
             type: FlxTweenType.PINGPONG
 			});
 
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(() -> new PlayState()); 
+
 			
 		}
 
@@ -95,7 +100,10 @@ class Menu extends FlxState{
 			var originalWidth = optionb.width;
 			FlxTween.tween(optionb, { width: originalWidth }, 0.1, {
             type: FlxTweenType.PINGPONG
-        });
+
+			
+		});
+			FlxG.switchState(() -> new OptionState());
 		}
 	}
 

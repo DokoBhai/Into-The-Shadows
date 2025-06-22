@@ -10,8 +10,9 @@ class Main extends Sprite
 		super();
 		#if discordSupported
 		addChild(new FlxGame(320, 240, DiscordClient));
+		#else
+		addChild(new FlxGame(320, 240, Menu));
 		#end
 
-		addChild(new FlxGame(320, 240, Menu));
 	}
 }

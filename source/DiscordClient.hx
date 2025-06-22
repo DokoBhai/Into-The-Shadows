@@ -35,6 +35,7 @@ class DiscordClient extends FlxState
                 Sys.sleep(1);
             }
         });
+        
 
         presence.state = "In The Menus";
         presence.details = "Into The Shadows";

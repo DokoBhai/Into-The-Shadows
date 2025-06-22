@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "lime",
-			"command": "test",
+			"command": "test cpp",
 			"group": {
 				"kind": "build",
 				"isDefault": true
