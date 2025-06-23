@@ -1,7 +1,6 @@
 package;
 
 import DiscordClient;
-import TransitionState;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.FlxG;
 import flixel.FlxObject;
