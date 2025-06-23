@@ -1,6 +1,8 @@
 package;
 
 import DiscordClient;
+import char.Npc;
+import debug.FpsCounterSubState;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -9,8 +11,6 @@ import flixel.FlxState;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup;
-import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
@@ -26,9 +26,13 @@ class PlayState extends FlxState
 	//Map stuff
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
+	var inx:Int;
+	var iny:Int;
+	var b:char.Npc;
 	override public function create()
 	{
 		super.create();
+
 		//map stuff
 		map = new FlxOgmo3Loader(AssetPaths.into__ogmo, AssetPaths.room_001__json);
 		walls = map.loadTilemap(AssetPaths.tiles__png, "walls");
@@ -60,6 +64,8 @@ class PlayState extends FlxState
 		player.maxVelocity.set(200, 400);
 		player.setSize(0, 0);
 		player.scale.set(0.5,0.5);
+
+		b = new Npc(200, 100);
 		
 		FlxG.camera.follow(player);
 		player.updateHitbox();
@@ -68,8 +74,11 @@ class PlayState extends FlxState
 		
 		
 		// Add sprites
-		//add(bg)
 		add(player);
+		add(b);
+
+
+		openSubState(new FpsCounterSubState());
 
 		openSubState(new CurtainOpenSubState(0.5));
 	}
@@ -105,8 +114,25 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.ESCAPE){
             FlxG.switchState(new Menu());
         }
-	
+
+		// NPC code
+		var isOnGround = FlxG.collide(b, walls);
+
+		if (isOnGround) {
+			b.followPlayer(player, 70);
+		}
+
+		var yDistance = player.y - b.y;
+
+		if (Math.abs(yDistance) > 100 && isOnGround) {
+				b.velocity.y = -200;
+		}
+
+		// Collide stuff
 		FlxG.collide(player, walls);
+		FlxG.collide(b, walls);
+		FlxG.collide(player, b);
+
 	
 	}	
 }

@@ -1,118 +1,82 @@
 import DiscordClient;
-import TransitionState;
 import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.graphics.FlxGraphic;
-import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import helpers.CurtainOpenSubState;
-import openfl.text.TextFieldAutoSize;
 
-class Menu extends FlxState{
+class Menu extends FlxState {
+    var buttons:Array<FlxText> = [];
+    var selected:Int = 0;
+    var bg:FlxSprite;
 
-	// Defining variables
-	var Playb:FlxText;
-	var optionb:FlxText;
-	var no:FlxText;
-	var sel:Float = 1;
-	var bg:FlxSprite;
+    override public function create() {
+        super.create();
 
-	override public function create()
-	{
-		super.create();
+        #if discordSupported
+        DiscordClient.changePresence("Let bro cook", "In The Menu's", "icon");
+        #end
 
-		#if discordSupported
-		DiscordClient.changePresence("Let bro cook", "In The Menu's", "icon");
-		#end
+        bg = new FlxSprite(0, 0);
+        bg.loadGraphic("assets/images/bg.png");
+        bg.setGraphicSize(FlxG.width, FlxG.height);
+        bg.screenCenter();
+        bg.scrollFactor.set(0, 0);
+        add(bg);
 
-		bg = new FlxSprite(0, 0);
-		bg.loadGraphic("assets/images/bg.png");
-		bg.setGraphicSize(FlxG.width, FlxG.height);
-		bg.screenCenter();
-		bg.scrollFactor.set(0, 0);
-		add(bg);
+        var labels = ["Play", "Options"];
+        for (i in 0...labels.length) {
+            var txt = new FlxText(0, 0, 300, labels[i]);
+            txt.setFormat("assets/fonts/def.ttf", 24, FlxColor.WHITE, FlxTextAlign.CENTER);
+            txt.width = Std.int(txt.textField.textWidth);
+			txt.updateHitbox();
+            txt.origin.set(txt.width / 2, txt.height / 2);
+            txt.x = FlxG.width / 2;
+            txt.y = 200 + (i * 60);
+            add(txt);
+            buttons.push(txt);
+        }
 
+        openSubState(new CurtainOpenSubState(0.5));
+    }
 
-		// Play button
-		Playb = new FlxText(100, 100, 600, "Play");
-		Playb.setFormat("Play", 50, FlxColor.WHITE, FlxTextAlign.CENTER);
-		Playb.font = "assets/fonts/def.ttf";
-		Playb.screenCenter(X);
-		add(Playb);
+    override public function update(elapsed:Float) {
+        super.update(elapsed);
 
-		// Oop bootonnnn lol
-		optionb = new FlxText(100, 100, 600, "Options");
-		optionb.setFormat("Options", 50, FlxColor.WHITE, FlxTextAlign.CENTER);
-		optionb.font = "assets/fonts/def.ttf";
-		optionb.screenCenter(X);
-		optionb.y += 100;
-		add(optionb);
+        // Navigation by keyboard
+        if (FlxG.keys.justPressed.W && selected > 0) selected--;
+        if (FlxG.keys.justPressed.S && selected < buttons.length - 1) selected++;
 
-		openSubState(new CurtainOpenSubState(0.5));
-	}
+        // Mouse hover selection
+        for (i in 0...buttons.length) {
+            if (FlxG.mouse.overlaps(buttons[i])) {
+                selected = i;
+                break;
+            }
+        }
 
-	override public function update(elapsed:Float)
-	{
-		super.update(elapsed);
+        // Animate buttons scale & follow camera on selected button
+        for (i in 0...buttons.length) {
+            var btn = buttons[i];
+            if (i == selected) {
+                FlxG.camera.follow(btn);
+                FlxG.camera.followLerp = 0.3;
+                FlxTween.tween(btn.scale, { x: 1.2, y: 1.2 }, 0.2);
+            } else {
+                FlxTween.tween(btn.scale, { x: 1, y: 1 }, 0.2);
+            }
+        }
 
-		if (FlxG.keys.justPressed.W)
-		{
-			if (sel == 2)
-			{
-				sel -= 1;
-			}
-		}
-
-		if (FlxG.keys.justPressed.S)
-		{
-			if (sel == 1)
-			{
-				sel += 1;
-			}
-		}
-
-		// Play button
-
-		if (sel == 1)
-		{
-			FlxG.camera.follow(Playb);
-			FlxG.camera.followLerp = 0.3;
-		}
-
-		if (sel == 1 && FlxG.keys.justPressed.ENTER)
-		{	
-			var originalWidth = Playb.width;
-			FlxTween.tween(Playb, { width: originalWidth }, 0.1, {
-            type: FlxTweenType.PINGPONG
-			});
-
-			FlxG.switchState(new PlayState());
-
-			
-		}
-
-		
-
-		// Options button
-
-		if (sel == 2)
-		{
-			FlxG.camera.follow(optionb);
-			FlxG.camera.followLerp = 0.3;
-		}
-		if (sel == 2 && FlxG.keys.justPressed.ENTER) {
-			var originalWidth = optionb.width;
-			FlxTween.tween(optionb, { width: originalWidth }, 0.1, {
-            type: FlxTweenType.PINGPONG
-
-			
-		});
-			FlxG.switchState(new OptionState());
-		}
-	}
-
+        // Enter key to switch states
+        if (FlxG.keys.justPressed.ENTER) {
+            switch (selected) {
+                case 0:
+                    FlxG.switchState(new PlayState());
+                case 1:
+                    FlxG.switchState(new OptionState());
+            }
+        }
+    }
 }
